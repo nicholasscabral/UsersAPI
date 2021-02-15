@@ -7,6 +7,16 @@ class UserController {
     res.send(users);
   }
 
+  async findUser(req, res) {
+    const id = req.params.id;
+
+    var user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({message: 'User not found'});
+    }
+    else return res.status(200).send(user);
+  }
+
   async create(req, res) {
     console.log(req.body);
 

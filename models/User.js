@@ -7,7 +7,18 @@ class User {
     try {
       var result = await knex.select(['id', 'email', 'role']).table('users');
 
-      return result;
+      return (result.length > 0) ? result[0] : [];
+    } 
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  async findById(id) {
+    try {
+      var result = await knex.select(['id','email','role','name']).where({id:id}).table('users');
+      
+      return (result.length > 0) ? result[0] : undefined;
     } 
     catch (error) {
       console.log(error)
